@@ -1,8 +1,19 @@
 
 <md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar md-default-theme">
-    <md-content class="md-padding" style="background: transparent;">
+    <div class="md-toolbar-tools">
         <p>Clients</p>
-    </md-content>
+        <span flex></span>
+        <md-menu>
+            <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu()">
+                <md-icon md-menu-origin class="" md-font-set="material-icons">more_vert</md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ui-sref="a.clients.new">New</md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
 </md-toolbar>
 <ui-view></ui-view>
 

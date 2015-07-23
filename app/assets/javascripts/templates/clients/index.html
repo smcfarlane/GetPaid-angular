@@ -2,11 +2,11 @@
     <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
     md-row-height-gt-md="2:2" md-row-height="2:2"
     md-gutter="12px" md-gutter-gt-sm="8px" class="gridList">
-        <md-grid-tile class="teal" ng-repeat="client in vm.clientList" md-colspan="2">
-            {{client.name}}
-            <md-grid-tile-footer>
-                <md-button>Projects</md-button>
-                <md-button>Edit</md-button>
+        <md-grid-tile class="blue-grey" ng-repeat="client in vm.clientList.organizations" md-colspan="2">
+            <a ui-sref="a.clients.show({clientId: client.id})" class="text-white md-body-1 text-decoration-none"><span class="md-title">{{client.name}}</span><br/>{{client.number_of_projects}} Projects</a>
+            <md-grid-tile-footer layout="row">
+                <md-button flex ui-sref="a.clients.show({clientId: client.id})">Projects</md-button>
+                <md-button flex ui-sref="a.clients.edit({clientId: client.id})">Edit</md-button>
             </md-grid-tile-footer>
         </md-grid-tile>
     </md-grid-list>

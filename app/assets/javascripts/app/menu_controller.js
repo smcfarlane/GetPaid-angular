@@ -48,6 +48,10 @@
         });
     };
 
+    $rootScope.$on('auth_fail', function(){
+      vm.menu = vm.menuItems.guest;
+    });
+
     $rootScope.$on('auth:validation-success', function(e, user){
       console.log('auth:validation-success event');
       vm.menu = vm.menuItems.login;

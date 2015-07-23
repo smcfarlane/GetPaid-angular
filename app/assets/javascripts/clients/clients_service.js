@@ -1,14 +1,24 @@
 (function(){
   angular.module('getPaid').factory('Clients', ['$resource', '$http', function($resource, $http){
-    var resource = $resource('clients/:id', null, {
-      update: {method: 'PUT'}
-    });
 
-    var getAll = $http.get('/clients');
+    var clientList = {};
 
     return {
-      resource: resource,
-      getAll: getAll
+      resource: $resource('clients/:id.json', null, {
+        update: {method: 'PUT'}
+      }),
+      getAll: $http.get('/clients.json'),
+      clientList: clientList,
+      refreshClientList: function(){
+        getAll
+          .success(function(data){
+            clientList = data;
+            console.log('clientList', clientList);
+          })
+          .error(function(){
+            console.log('failed to get clients')
+          });
+      }
     };
   }]);
 })();

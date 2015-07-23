@@ -1,5 +1,5 @@
 (function() {
-  angular.module('getPaid').factory('authInterceptor', ['$q', 'ipCookie', '$location', '$window', function ($q, ipCookie, $location, $window) {
+  angular.module('getPaid').factory('authInterceptor', ['$q', '$location', '$rootScope', '$window', function ($q, $location, $rootScope, $window) {
     return {
       request: function (config) {
         var authVars = JSON.parse($window.localStorage.getItem('auth_headers'));
@@ -14,8 +14,10 @@
       },
       responseError: function (response) {
         if (response.status === 401) {
-          $location.path('/login');
-          ipCookie.remove('access-token');
+          $rootScope.$broadcast('auth_fail');
+          $location.path('/auth/sing_in');
+          $window.localStorage.removeItem('auth_headers');
+
         }
         return $q.reject(response);
       }

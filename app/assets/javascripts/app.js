@@ -8,11 +8,14 @@
           'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
           'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
         })
-      .accentPalette('blue-grey', {
+      .accentPalette('deep-purple', {
           'default': '200' // use shade 200 for default, and keep all other shades the same
         })
       .warnPalette('red')
       .backgroundPalette('grey');
+  })
+  .config(function($mdIconProvider) {
+    $mdIconProvider.fontSet('fa', 'fontawesome');
   })
   .config(function($authProvider) {
     $authProvider.configure({
@@ -73,12 +76,12 @@
         templateUrl: 'auth/auth.html'
       })
       .state('auth.sign_up', {
-        url: '/auth/sign_up',
+        url: '/sign_up',
         templateUrl: 'auth/sign_up.html',
         controller: 'SignUpCtrl as vm'
       })
       .state('auth.sign_in', {
-        url: 'auth/sign_in',
+        url: '/sign_in',
         templateUrl: 'auth/sign_in.html',
         controller: 'SignInCtrl as vm'
       })
@@ -121,11 +124,27 @@
       })
       .state('a.clients.index', {
         url: '/index',
-        templateUrl: 'clients/index.html'
+        templateUrl: 'clients/index.html',
+        resolve: {
+          list: ['Clients', function(Clients) { console.log('resolved!!'); return Clients.resource.get();}]
+        },
+        controller: 'ClientsCtrl',
+        controllerAs: 'vm'
       })
       .state('a.clients.show', {
         url: '/:clientId/projects',
-        templateUrl: 'clients/show.html'
+        templateUrl: 'clients/show.html',
+        controller: 'ClientCtrl as vm'
+      })
+      .state('a.clients.new', {
+        url: '/new',
+        templateUrl: 'clients/form.html',
+        controller: 'NewClientCtrl as vm'
+      })
+      .state('a.clients.edit', {
+        url: '/:clientId/edit',
+        templateUrl: 'clients/form.html',
+        controller: 'EditClientCtrl as vm'
       })
     });
 })();

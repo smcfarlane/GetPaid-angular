@@ -1,0 +1,48 @@
+<md-content class="md-padding">
+    <md-card>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h1 class="text-white">{{vm.client.organization.name}}</h1>
+                <span flex></span>
+                <md-menu>
+                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu()">
+                        <md-icon md-menu-origin class="text-white" md-font-set="material-icons">more_vert</md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ui-sref="a.clients.edit({clientId: vm.client.organization.id})">Edit</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button warn>Delete</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </md-toolbar>
+        <md-content class="md-padding">
+            <div layout="row">
+                <p flex="25" class="md-body-1">
+                    <span class="md-title">Address</span><br/>
+                    {{vm.client.organization.address.street_address}}<br/>
+                    {{vm.client.organization.address.street_address2}}<br/>
+                    {{vm.client.organization.address.city}}, {{vm.client.organization.address.state}} {{vm.client.organization.address.zip}}
+                </p>
+                <p flex="25" class="md-body-1">
+                    <span class="md-title">Phone</span><br/>
+                    {{vm.client.organization.phone.phone}}
+                </p>
+            </div>
+
+            <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+                          md-row-height-gt-md="2:2" md-row-height="2:2"
+                          md-gutter="12px" md-gutter-gt-sm="8px" class="gridList">
+                <md-grid-tile class="blue-grey text-white" ng-repeat="project in vm.client.organization.projects" md-colspan="2">
+                    <p class="md-body-1"><span class="md-title">{{project.name}}</span><br/>{{project.identifier}}</p>
+                    <md-grid-tile-footer layout="row">
+                        <md-button flex>Invoices
+                    </md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-content>
+    </md-card>
+</md-content>
